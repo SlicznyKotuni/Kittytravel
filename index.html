@@ -42,13 +42,30 @@
       from { transform: translateY(0); }
       to { transform: translateY(-3px); }
     }
+      .kitty-icon {
+      display: inline-block;
+      animation: blink 2s infinite;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.2; }
+    }
+    section.cyber-section {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border-radius: 1rem;
+    }
+    section.cyber-section:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--neon-blue-glow);
+    }
   </style>
 </head>
 <body>
   <header class="cyber-section">
-    <h1 class="neon-text">Słowenia 2025</h1>
+    <h1 class="neon-text"><span class="kitty-icon">🐾</span> Słowenia 2025 <span class="kitty-icon">🐾</span></h1>
     <button class="cyber-button small" onclick="toggleAllSections()">Ukryj wszystkie</button>
     <button class="cyber-button small" onclick="scrollToMap()">Pokaż Mapę</button>
+      <a class="cyber-button small" href="https://github.com/SlicznyKotuni/Kittytravel" target="_blank">🌐 Kittytravel GitHub</a>
   </header>
   <main id="content"></main>
   <div id="map" class="cyber-section"></div>
@@ -179,5 +196,10 @@
       setTimeout(() => map.invalidateSize(), 500);
     }
   </script>
+  <footer class="cyber-section" style="text-align: center; padding: 1rem; margin-top: 2rem;">
+    <p class="neon-pink" style="font-size: 1.2rem;">
+      🐱✨ Kitty travel by ŚlicznyKotuni 2025 ✨🐱
+    </p>
+  </footer>
 </body>
 </html>
