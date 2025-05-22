@@ -1,0 +1,347 @@
+{
+    "nazwaWycieczki": "Słowenia2025",
+    "centrowanieMapy": {
+        "latitude": 46.1492,
+        "longitude": 14.9860,
+        "zoom": 8
+    },
+    "sekcje": [
+        {
+            "id": "01",
+            "tytul": "Zamek Predjama (Predjamski Grad)",
+            "lokalizacja": {
+                "latitude": 45.8158,
+                "longitude": 14.1269
+            },
+            "opis": "Wyobraź sobie zamek, który wyrasta wprost ze skały, spowity legendami i tajemnicami. Predjama to więcej niż budowla – to harmonijne połączenie ludzkiej pomysłowości z potęgą natury. Wędrując po jego komnatach, poczujesz ducha średniowiecza, usłyszysz szepty dawnych rycerzy i poznasz historię Erazma z Predjamy, który niczym słoweński Robin Hood stawiał czoła cesarskiej armii. Odkryj ukryte tunele, lochy i zbrojownię, a na koniec podziwiaj panoramę doliny, która rozciąga się u Twoich stóp. To miejsce, gdzie rzeczywistość miesza się z legendą, a każdy kamień ma swoją opowieść do przekazania.",
+            "podsekcje": []
+        },
+        {
+            "id": "02",
+            "tytul": "Zamek Otočec",
+            "lokalizacja": {
+                "latitude": 45.8418,
+                "longitude": 15.2484
+            },
+            "opis": "Zanurz się w bajkowej scenerii jedynego wodnego zamku w Słowenii. Otočec to perła architektury, otoczona szmaragdowymi wodami rzeki Krki. Przejdź przez drewniany most, który prowadzi do wnętrza warowni, i poczuj się jak gość królewskiego dworu. Spaceruj po eleganckich komnatach, podziwiaj renesansowe detale i gotyckie sklepienia, a na koniec zrelaksuj się w zamkowej restauracji, delektując się wykwintnymi smakami Słowenii. To miejsce, gdzie historia łączy się z luksusem, a każdy detal tworzy niezapomnianą atmosferę.",
+            "podsekcje": []
+        },
+        {
+            "id": "03",
+            "tytul": "Zamek Borl (Borl Castle)",
+            "lokalizacja": {
+                "latitude": 46.4593,
+                "longitude": 15.9199
+            },
+            "opis": "Wyrusz w podróż do średniowiecznej twierdzy, która przez wieki strzegła strategicznej przeprawy przez Drawę. Zamek Borl to monumentalna budowla, wzniesiona na wysokim, skalnym cyplu. Podziwiaj potężne mury, renesansowe arkady i kaplicę z XVII wieku, a na koniec wejdź na zewnętrzny taras, skąd rozciąga się zapierający dech w piersiach widok na okolicę. Poczuj ducha historii, który unosi się w powietrzu, i posłuchaj opowieści o dawnych właścicielach zamku, którzy walczyli o władzę i wpływy. To miejsce, gdzie czas się zatrzymał, a każdy kamień kryje w sobie fragment burzliwej przeszłości.",
+            "podsekcje": []
+        },
+        {
+            "id": "04",
+            "tytul": "Jaskinia Postojna (i Jaskinia Predjamska)",
+            "lokalizacja": {
+                "latitude": 45.7923,
+                "longitude": 14.2069
+            },
+            "opis": "Przygotuj się na niezapomnianą podróż do wnętrza Ziemi! Jaskinia Postojna to największy system jaskiń w Słowenii, gdzie podziemny pociąg zabierze Cię w labirynt korytarzy i komnat, pełnych stalaktytów i stalagmitów. Podziwiaj kryształowo czyste jeziora, olbrzymie formacje skalne i poznaj mieszkańców tego niezwykłego świata – od tajemniczych odmieńców jaskiniowych po kolonie nietoperzy. A jeśli pragniesz jeszcze więcej przygód, odwiedź Jaskinię Predjamską, ukrytą pod Zamkiem Predjama, i odkryj jej tajemnice. To miejsce, gdzie cuda natury łączą się z historią i legendami, tworząc niezapomniane wrażenia.",
+            "podsekcje": []
+        },
+        {
+            "id": "05",
+            "tytul": "Dwór w Dornawie",
+            "lokalizacja": {
+                "latitude": 46.4167,
+                "longitude": 15.9833
+            },
+            "opis": "Przenieś się w czasie do epoki baroku i odkryj piękno Dworu w Dornawie, jednego z najwspanialszych zabytków architektury w Słowenii. Spaceruj po rozległym parku, pełnym fontann, rzeźb i egzotycznych roślin, i podziwiaj elegancką fasadę dworu, ozdobioną bogatymi detalami. Wejdź do wnętrza, gdzie czekają na Ciebie przepiękne sale balowe, galerie i komnaty, pełne dzieł sztuki i cennych mebli. To miejsce, gdzie historia łączy się z naturą, a każdy detal tworzy niepowtarzalną atmosferę luksusu i elegancji. Poczuj się jak gość hrabiego Attemsa i pozwól się oczarować pięknu tego niezwykłego miejsca.",
+            "podsekcje": []
+        },
+
+
+{
+    "id": "06",
+    "tytul": "Ptuj",
+    "lokalizacja": {
+        "latitude": 46.4167,
+        "longitude": 15.8733
+    },
+    "opis": "Witaj w Ptuju, najstarszym mieście Słowenii! Przenieś się w czasie, spacerując po brukowanych uliczkach, podziwiając romańskie zabytki i renesansowe fasady. Odkryj bogatą historię tego miejsca, od czasów rzymskich po średniowiecze, i poczuj atmosferę miasta, które tętni życiem przez cały rok.",
+    "podsekcje": [
+        {
+            "id": "06A",
+            "tytul": "Zamek Ptuj",
+            "lokalizacja": {
+                "latitude": 46.4167,
+                "longitude": 15.8733
+            },
+            "opis": "Wznoszący się majestatycznie na wzgórzu, Zamek Ptuj to symbol miasta i jeden z najpiękniejszych zamków w Słowenii. Jego historia sięga XII wieku, a w jego wnętrzach kryją się bezcenne skarby. Zwiedź zamkowe muzeum, gdzie czekają na Ciebie bogate kolekcje: od militariów i instrumentów muzycznych po barwne stroje karnawałowe. Podziwiaj renesansowy dziedziniec i rozkoszuj się widokiem na malownicze miasto i wijącą się leniwie Drawę. Zwróć uwagę na liczne rzeźby i kamienne płaskorzeźby zdobiące ściany zamku, a także na unikatową kolekcję sztuki tureckiej, będącą świadectwem dawnych kontaktów Ptuju z Orientem. To miejsce, gdzie historia łączy się ze sztuką, tworząc niezapomniane wrażenia.",
+            "podsekcje": []
+        },
+        {
+            "id": "06B",
+            "tytul": "Jezioro Ptuj",
+            "lokalizacja": {
+                "latitude": 46.4000,
+                "longitude": 15.8500
+            },
+            "opis": "Odetchnij świeżym powietrzem nad brzegiem Jeziora Ptuj, największego sztucznego jeziora w Słowenii. To idealne miejsce na relaks, aktywny wypoczynek i obserwację ptaków. Przejdź się ścieżką edukacyjną, wypożycz rower lub kajak i odkryj uroki tego malowniczego zakątka. Jezioro jest domem dla ponad 230 gatunków ptaków, w tym rzadkich i chronionych gatunków. Wędkarze również znajdą tu coś dla siebie, łowiąc karpie, szczupaki i inne ryby. To miejsce, gdzie natura łączy się z rekreacją, oferując niezliczone możliwości spędzenia czasu na świeżym powietrzu.",
+            "podsekcje": []
+        },
+        {
+            "id": "06C",
+            "tytul": "Stare Miasto Ptuj",
+            "lokalizacja": {
+                "latitude": 46.4150,
+                "longitude": 15.8750
+            },
+            "opis": "Zgub się w labiryncie wąskich uliczek Starego Miasta Ptuj, gdzie na każdym kroku czekają na Ciebie zabytkowe budynki, urokliwe kawiarnie i galerie sztuki. Podziwiaj architekturę miasta, która łączy w sobie elementy romańskie, gotyckie, renesansowe i barokowe. Odwiedź liczne kościoły, kaplice i pomniki, które świadczą o bogatej historii tego miejsca. To tutaj, w sercu miasta, odbywają się liczne festiwale, koncerty i wydarzenia kulturalne, które przyciągają turystów z całego świata. Spacerując po Starym Mieście, zwróć uwagę na detale architektoniczne, takie jak kamienne portale, rzeźbione balkony i malownicze fasady, które tworzą niepowtarzalny klimat tego miejsca.",
+            "podsekcje": []
+        },
+        {
+            "id": "06D",
+            "tytul": "Wieża Miejska (Town Tower)",
+            "lokalizacja": {
+                "latitude": 46.4144,
+                "longitude": 15.8742
+            },
+            "opis": "Wznosząca się dumnie nad miastem, Wieża Miejska to jeden z najważniejszych zabytków Ptuju. Zbudowana w XIII wieku, pełniła funkcję strażniczą i obronną, a także była symbolem miejskiej władzy i niezależności. Wejdź na szczyt wieży, skąd rozciąga się wspaniały widok na Stare Miasto, Zamek Ptuj i okoliczne wzgórza. Zwróć uwagę na zegar umieszczony na wieży, który od wieków odmierza czas w Ptuju. To miejsce, gdzie historia łączy się z panoramą, oferując niezapomniane wrażenia wizualne.",
+            "podsekcje": []
+        },
+        {
+            "id": "06E",
+            "tytul": "Monument Orfeusza (Orpheus Monument)",
+            "lokalizacja": {
+                "latitude": 46.4144,
+                "longitude": 15.8742
+            },
+            "opis": "Podziwiaj Monument Orfeusza, jeden z najważniejszych zabytków rzymskich w Słowenii. Ten imponujący marmurowy pomnik, wzniesiony w II wieku n.e., poświęcony jest legendarnemu Orfeuszowi, patronowi muzyki i poezji. Monument zdobią płaskorzeźby przedstawiające sceny z mitologii greckiej, a także inskrypcje upamiętniające rzymskiego urzędnika, który ufundował pomnik. To miejsce, gdzie historia starożytna łączy się z legendą, tworząc fascynującą opowieść o Ptuju.",
+            "podsekcje": []
+        },
+        {
+            "id": "06F",
+            "tytul": "Klasztor Dominikanów",
+            "lokalizacja": {
+                "latitude": 46.4150,
+                "longitude": 15.8700
+            },
+            "opis": "Odkryj Klasztor Dominikanów, perłę architektury gotyckiej w Ptuju. Zbudowany w XIII wieku, klasztor był ważnym ośrodkiem religijnym i kulturalnym, a dziś zachwyca swoją surową elegancją i bogatą historią. Zwiedź klasztorne krużganki, kościół i bibliotekę, gdzie czekają na Ciebie cenne manuskrypty i inkunabuły. Zwróć uwagę na freski zdobiące ściany klasztoru, które przedstawiają sceny z życia świętych i historii zakonu. To miejsce, gdzie duchowość łączy się ze sztuką, oferując chwilę wytchnienia i refleksji.",
+            "podsekcje": []
+        },
+        {
+            "id": "06G",
+            "tytul": "Klasztor Franciszkanów",
+            "lokalizacja": {
+                "latitude": 46.4100,
+                "longitude": 15.8750
+            },
+            "opis": "Zanurz się w historii w Klasztorze Franciszkanów, kolejnym ważnym zabytku Ptuju. Klasztor, założony w XIII wieku, przez wieki pełnił rolę ośrodka religijnego i edukacyjnego. Podziwiaj gotycką architekturę kościoła klasztornego, a także barokowe wnętrza i liczne dzieła sztuki. Odwiedź klasztorną bibliotekę, gdzie zgromadzono cenne zbiory książek i dokumentów. To miejsce, gdzie historia łączy się z tradycją, tworząc atmosferę spokoju i zadumy.",
+            "podsekcje": []
+        },
+        {
+            "id": "06H",
+            "tytul": "Świątynie Mitry (Mithraeum)",
+            "lokalizacja": {
+                "latitude": 46.4100,
+                "longitude": 15.8800
+            },
+            "opis": "Przenieś się w czasie do starożytnego Rzymu i odkryj Świątynie Mitry, tajemnicze miejsca kultu poświęcone perskiemu bogu Mitrze. W Ptuju zachowały się trzy świątynie Mitry, które świadczą o popularności tego kultu w czasach rzymskich. Podziwiaj zachowane fragmenty rzeźb, ołtarzy i fresków, które przedstawiają sceny z mitologii Mitry. To miejsce, gdzie historia starożytna łączy się z tajemnicą, pobudzając wyobraźnię i zachęcając do zgłębiania wiedzy o dawnych wierzeniach.",
+            "podsekcje": []
+        }
+    ]
+},
+{
+    "id": "07",
+    "tytul": "Maribor",
+    "lokalizacja": {
+        "latitude": 46.5547,
+        "longitude": 15.6466
+    },
+    "opis": "Witaj w Mariborze, drugim co do wielkości mieście Słowenii! To miasto, gdzie historia łączy się z nowoczesnością, a winiarskie tradycje sięgają wieków. Spaceruj po urokliwych uliczkach, podziwiaj zabytkową architekturę i odkryj bogactwo kulturowe tego miejsca.",
+    "podsekcje": [
+        {
+            "id": "07A",
+            "tytul": "Najstarsza Winorośl Świata (World’s Oldest Grapevine)",
+            "lokalizacja": {
+                "latitude": 46.5566,
+                "longitude": 15.6422
+            },
+            "opis": "Przedstawiam Ci Starą Trtę, najstarszą winorośl na świecie, która dumnie rośnie w Mariborze od ponad 400 lat! Ta wyjątkowa roślina, wpisana do Księgi Rekordów Guinnessa, to symbol słoweńskiej tradycji winiarskiej. Odmiana winogron to Žametovka (Modra Kavčina), a każdego roku daje ona około 35-55 kg winogron, z których wytwarza się około 100 butelek wyjątkowego wina. Odwiedź Old Vine House, muzeum poświęcone historii winorośli, gdzie możesz dowiedzieć się więcej o jej certyfikatach i uczestniczyć w wydarzeniach związanych z winem. To miejsce, gdzie historia łączy się z naturą, tworząc niezapomniane wrażenia.",
+            "podsekcje": []
+        },
+        {
+            "id": "07B",
+            "tytul": "Zamek w Mariborze (Maribor Castle)",
+            "lokalizacja": {
+                "latitude": 46.5555,
+                "longitude": 15.6477
+            },
+            "opis": "Odkryj Zamek w Mariborze, renesansową perłę architektury, która wznosi się dumnie w centrum miasta. Zamek, zbudowany w XV wieku, był wielokrotnie przebudowywany, łącząc w sobie różne style architektoniczne. Obecnie w zamku mieści się Muzeum Regionalne Maribor, gdzie możesz podziwiać bogate kolekcje, w tym freski, sale reprezentacyjne i wystawy czasowe. Zwiedź zamkowe sale, aby przenieść się w czasie i poznać fascynującą historię tego miejsca. Zwróć uwagę na Salę Festiwalową z malowidłami sufitowymi Johanna Geblera, przedstawiającymi bitwy między chrześcijanami a Turkami. To miejsce, gdzie historia łączy się ze sztuką, oferując niezapomniane wrażenia kulturalne.",
+            "podsekcje": []
+        },
+        {
+            "id": "07C",
+            "tytul": "Główny Rynek (Glavni trg)",
+            "lokalizacja": {
+                "latitude": 46.5544,
+                "longitude": 15.6466
+            },
+            "opis": "Poczuj atmosferę Mariboru na Głównym Rynku (Glavni trg), sercu miasta, otoczonym zabytkowymi kamienicami. Na rynku dominuje kolumna maryjna, a także renesansowy ratusz, który dodaje mu uroku. Odwiedź liczne kawiarnie i restauracje, aby zrelaksować się i podziwiać architekturę tego miejsca. Rynek Główny ma bogatą historię, sięgającą średniowiecza, a dziś jest miejscem licznych wydarzeń i festiwali. Spacerując po rynku, zwróć uwagę na detale architektoniczne budynków, które tworzą niepowtarzalny klimat tego miejsca. To tutaj, w sercu miasta, możesz poczuć prawdziwego ducha Mariboru.",
+            "podsekcje": []
+        },
+        {
+            "id": "07D",
+            "tytul": "Wieża Wodna (Water Tower) / Wieża Sądowa (Judgement Tower)",
+            "lokalizacja": {
+                "latitude": 46.5555,
+                "longitude": 15.6433
+            },
+            "opis": "Podziwiaj Wieżę Wodną i Wieżę Sądową, ważne elementy architektury obronnej Mariboru. Wieża Wodna, pochodząca z XVI wieku, ma kształt pięciokąta i została zbudowana z masywnych kamiennych bloków. Wieża Sądowa, zwana również Wieżą Portową, to przykład średniowiecznej architektury obronnej. Obie wieże mają bogatą historię i pełnią funkcje obronne. Choć nie ma potwierdzonych informacji o możliwości wejścia na Wieżę Wodną, warto podziwiać jej architekturę z zewnątrz. Wieża Sądowa, z kolei, oferuje wgląd w historię obronności miasta. To miejsca, gdzie historia łączy się z architekturą, tworząc fascynującą opowieść o Mariborze.",
+            "podsekcje": []
+        }
+    ]
+},
+{
+    "id": "08",
+    "tytul": "Radovljica",
+    "lokalizacja": {
+        "latitude": 46.3411,
+        "longitude": 14.1758
+    },
+    "opis": "Odkryj Radovljicę, urokliwe miasteczko w sercu Słowenii, które zachwyca swoją historyczną architekturą i spokojną atmosferą. Spaceruj po malowniczym rynku, zwiedź Muzeum Farmacji i Alchemii i poczuj ducha dawnych czasów.",
+    "podsekcje": [
+        {
+            "id": "08A",
+            "tytul": "Muzeum Farmacji i Alchemii w Radovljicy",
+            "lokalizacja": {
+                "latitude": 46.3411,
+                "longitude": 14.1758
+            },
+            "opis": "Przenieś się w czasie w Muzeum Farmacji i Alchemii w Radovljicy, gdzie możesz podziwiać XVIII-wieczny sprzęt apteczny, zdobione naczynia ceramiczne do przechowywania leków oraz laboratorium alchemika. Muzeum oferuje unikalną kolekcję, która pozwala zgłębić historię farmacji i alchemii. Choć informacje na temat interaktywnych wystaw i ogrodu ziołowego są ograniczone, z pewnością znajdziesz tu wiele ciekawych eksponatów i opowieści. To miejsce, gdzie nauka łączy się z historią, oferując fascynującą podróż w przeszłość.",
+            "podsekcje": []
+        },
+        {
+            "id": "08B",
+            "tytul": "Rynek w Radovljicy",
+            "lokalizacja": {
+                "latitude": 46.3411,
+                "longitude": 14.1758
+            },
+            "opis": "Spaceruj po malowniczym Rynku w Radovljicy, gdzie możesz podziwiać zabytkowe kamienice i fontannę. Rynek ma bogatą historię i jest miejscem licznych wydarzeń i festynów. Choć informacje na temat Domu Lisjaka i szczegółów architektonicznych są ograniczone, z pewnością poczujesz tu wyjątkową atmosferę tego urokliwego miasteczka. To miejsce, gdzie historia łączy się z codziennym życiem, tworząc niepowtarzalny klimat.",
+            "podsekcje": []
+        }
+    ]
+},
+
+{
+    "id": "09",
+    "tytul": "Celje",
+    "lokalizacja": {
+        "latitude": 46.2394,
+        "longitude": 15.2606
+    },
+    "opis": "Odkryj Celje, miasto hrabiów, gdzie historia przeplata się z nowoczesnością. Zwiedź potężny zamek, odkryj tajemnice starożytnej Celei i poczuj puls tego dynamicznego miasta.",
+    "podsekcje": [
+        {
+            "id": "09A",
+            "tytul": "Celje (grad)",
+            "lokalizacja": {
+                "latitude": 46.2422,
+                "longitude": 15.2533
+            },
+            "opis": "Wznoszący się na wzgórzu, Zamek Celje to największy średniowieczny zabytek w Słowenii. Dawna siedziba hrabiów Celjskich, potężnego rodu, który przez pewien czas konkurował z Habsburgami. Zwiedź zamkowe mury, wieże i dziedzińce, aby przenieść się w czasie i poczuć ducha średniowiecza. Podziwiaj panoramę miasta i okolicznych wzgórz. Latem na zamku odbywają się liczne imprezy, koncerty i przedstawienia, które ożywiają to miejsce. To tutaj, w murach zamku, możesz poczuć ducha historii i posłuchać legend o hrabiach Celjskich.",
+            "podsekcje": []
+        },
+        {
+            "id": "09B",
+            "tytul": "Pałac Książęcy",
+            "lokalizacja": {
+                "latitude": 46.2389,
+                "longitude": 15.2611
+            },
+            "opis": "Odkryj Pałac Książęcy, w którym mieści się oddział Muzeum Regionalnego. W podziemiach pałacu znajduje się wystawa \"Celeia – miasto pod dzisiejszym miastem\", prezentująca pozostałości rzymskiej Celei. Spaceruj wśród starożytnych murów i mozaik, aby poczuć ducha czasów rzymskich. Pałac Książęcy to ważne miejsce historyczne, chronione jako zabytek kultury o znaczeniu krajowym. To tutaj, w sercu Celje, możesz przenieść się w czasie i odkryć bogatą historię tego miejsca.",
+            "podsekcje": []
+        },
+        {
+            "id": "09C",
+            "tytul": "Celeia – Miasto pod Dzisiejszym Miastem (“Celeia – a town beneath today’s town\")",
+            "lokalizacja": {
+                "latitude": 46.2389,
+                "longitude": 15.2611
+            },
+            "opis": "Zanurz się w historii starożytnej Celei, rzymskiego miasta, które leży pod dzisiejszym Celje. Wystawa archeologiczna w podziemiach Pałacu Książęcego to największa prezentacja in situ pozostałości rzymskiej Celei. Spaceruj wśród starożytnych murów, podziwiaj mozaiki i odkryj fascynujące artefakty. Celeia była ważnym ośrodkiem handlowym i administracyjnym w czasach rzymskich, a jej pozostałości świadczą o bogatej historii tego miejsca. To tutaj, pod powierzchnią dzisiejszego miasta, możesz odkryć fascynujący świat starożytności.",
+            "podsekcje": []
+        },
+        {
+            "id": "09D",
+            "tytul": "Muzeum Regionalne w Celje (Pokrajinski muzej Celje)",
+            "lokalizacja": {
+                "latitude": 46.2389,
+                "longitude": 15.2611
+            },
+            "opis": "Zwiedź Muzeum Regionalne w Celje, drugie najstarsze muzeum w Słowenii, które gromadzi i prezentuje dziedzictwo kulturowe miasta i regionu Celje od czasów prehistorycznych do I wojny światowej. Podziwiaj kolekcje archeologiczne, historyczne i etnograficzne, które opowiadają o bogatej historii tego miejsca. Zwróć uwagę na salę z iluzjonistycznym malarstwem sufitowym oraz wystawę poświęconą Almie M. Karlin, pisarce i podróżniczce. Muzeum Regionalne to miejsce, gdzie możesz zgłębić wiedzę o historii i kulturze Celje i okolic.",
+            "podsekcje": []
+        }
+    ]
+},
+{
+    "id": "10",
+    "tytul": "Dolina Soczy (Soča Valley)",
+    "lokalizacja": {
+        "latitude": 46.3333,
+        "longitude": 13.5667
+    },
+    "opis": "Witaj w Dolinie Soczy, raju dla miłośników aktywnego wypoczynku i zapierających dech w piersiach krajobrazów! Szmaragdowa rzeka Socza, Alpy Julijskie i dziewicza przyroda tworzą niezapomnianą scenerię.",
+    "podsekcje": []
+},
+{
+    "id": "11",
+    "tytul": "Logarska Dolina (Logar Valley)",
+    "lokalizacja": {
+        "latitude": 46.3769,
+        "longitude": 14.6394
+    },
+    "opis": "Odkryj Logarską Dolinę, jedną z najpiękniejszych alpejskich dolin polodowcowych w Europie! Harmonia między tradycją, człowiekiem i przyrodą tworzy idylliczny krajobraz. Wędruj po szlakach turystycznych, podziwiaj majestatyczne szczyty i wodospad Rinka.",
+    "podsekcje": []
+},
+{
+    "id": "12",
+    "tytul": "Kościół Pielgrzymkowy Świętej Trójcy w miejscowości Sveta Trojica v Slovenskih Goricah (Holy Trinity Pilgrimage Church in Sveta Trojica v Slovenskih Goricah)",
+    "lokalizacja": {
+        "latitude": 46.5783,
+        "longitude": 15.9469
+    },
+    "opis": "Odwiedź Kościół Pielgrzymkowy Świętej Trójcy, perłę architektury sakralnej, położoną w malowniczej miejscowości Sveta Trojica v Slovenskih Goricah. Podziwiaj barokową fasadę i bogato zdobione wnętrze. To miejsce, gdzie duchowość łączy się z pięknem natury.",
+    "podsekcje": []
+},
+{
+    "id": "13",
+    "tytul": "Schloss Statenberg",
+    "lokalizacja": {
+        "latitude": 46.1833,
+        "longitude": 15.5667
+    },
+    "opis": "Odkryj Schloss Statenberg, zabytkowy zamek, który wznosi się dumnie nad okolicą. Podziwiaj architekturę i poznaj historię tego miejsca. To idealne miejsce dla miłośników historii i pięknych krajobrazów.",
+    "podsekcje": []
+},
+{
+    "id": "14",
+    "tytul": "Farma lawendy w Haloze (Lavender Farm Haloze)",
+    "lokalizacja": {
+        "latitude": 46.3500,
+        "longitude": 15.8833
+    },
+    "opis": "Zanurz się w fioletowym morzu lawendy na farmie w Haloze! Poczuj kojący zapach i podziwiaj malownicze krajobrazy. To idealne miejsce na relaks i odprężenie.",
+    "podsekcje": []
+},
+{
+    "id": "15",
+    "tytul": "Zamek Negova (Negova Castle)",
+    "lokalizacja": {
+        "latitude": 46.6444,
+        "longitude": 15.7675
+    },
+    "opis": "Zwiedź Zamek Negova, położony w malowniczej okolicy. Podziwiaj architekturę i poznaj historię tego miejsca. To idealne miejsce dla miłośników historii i pięknych widoków.",
+    "podsekcje": []
+}
+    ]
+}

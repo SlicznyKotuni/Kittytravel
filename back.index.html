@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Słowenia 2025</title>
+  <link rel="stylesheet" href="cyber-theme.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css">
+  <style>
+    .gallery img {
+      max-width: 150px;
+      margin: 5px;
+      border: 2px solid var(--neon-blue);
+    }
+    #map {
+      height: 400px;
+      margin: 2rem 0;
+      z-index: 0;
+    }
+    textarea {
+      width: 100%;
+      resize: vertical;
+      background-color: var(--cyber-darker);
+      color: var(--cyber-lighter);
+      border: 1px solid var(--neon-purple);
+      padding: 1rem;
+      font-family: monospace;
+    }
+    .toggle-button {
+      margin: 0.5rem 0;
+    }
+    .section-content {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <header class="cyber-section">
+    <h1 class="neon-text">Słowenia 2025</h1>
+    <button class="cyber-button small" onclick="toggleAllSections()">Zwiń/Rozwiń wszystko</button>
+    <button class="cyber-button small" onclick="scrollToMap()">Pokaż Mapę</button>
+  </header>
+
+  <main id="content"></main>
+  <div id="map" class="cyber-section"></div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js"></script>
+  <script>
+    const content = document.getElementById('content');
+    let map;
+    let allVisible = true;
+
+    fetch('trip.json')
+      .then(res => res.json())
+      .then(data => {
+        document.querySelector('h1').textContent = data.nazwaWycieczki;
+        generateSections(data.sekcje);
+        initMap(data.centrowanieMapy, data.sekcje);
+      });
+
+    function generateSections(sections) {
+      sections.forEach(sec => {
+        const section = document.createElement('section');
+        section.classList.add('cyber-section');
+
+        const h2 = document.createElement('h2');
+        h2.classList.add('neon-purple');
+        h2.textContent = sec.tytul;
+
+        const toggle = document.createElement('button');
+        toggle.textContent = 'Zwiń/Rozwiń';
+        toggle.className = 'cyber-button small toggle-button';
+        toggle.onclick = () => {
+          secContent.style.display = secContent.style.display === 'none' ? 'block' : 'none';
+        };
+
+        const secContent = document.createElement('div');
+        secContent.className = 'section-content';
+
+        const text = document.createElement('textarea');
+        text.rows = 6;
+        text.value = sec.opis;
+
+        const gallery = createGallery(sec.id);
+
+        secContent.appendChild(text);
+        secContent.appendChild(gallery);
+
+        sec.podsekcje.forEach(sub => {
+          const subTitle = document.createElement('h3');
+          subTitle.classList.add('cyber-subtitle');
+          subTitle.textContent = sub.tytul;
+
+          const subText = document.createElement('textarea');
+          subText.rows = 4;
+          subText.value = sub.opis;
+
+          const subGallery = createGallery(sub.id);
+
+          secContent.appendChild(subTitle);
+          secContent.appendChild(subText);
+          secContent.appendChild(subGallery);
+        });
+
+        section.appendChild(h2);
+        section.appendChild(toggle);
+        section.appendChild(secContent);
+        content.appendChild(section);
+      });
+    }
+
+    function createGallery(id) {
+      const gallery = document.createElement('div');
+      gallery.classList.add('gallery');
+      for (let i = 1; i <= 10; i++) {
+        const imgPath = `foto/${id}/${i}.jpg`;
+        const a = document.createElement('a');
+        a.href = imgPath;
+        a.setAttribute('data-lightbox', id);
+        const img = document.createElement('img');
+        img.src = imgPath;
+        img.alt = `${id} image ${i}`;
+        img.onload = () => gallery.appendChild(a);
+        img.onerror = () => {};
+        a.appendChild(img);
+      }
+      return gallery;
+    }
+
+    function initMap(center, sections) {
+      map = L.map('map').setView([center.latitude, center.longitude], center.zoom);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap'
+      }).addTo(map);
+
+      sections.forEach(sec => {
+        addMarker(sec);
+        sec.podsekcje.forEach(sub => addMarker(sub));
+      });
+    }
+
+    function addMarker(item) {
+      const { latitude, longitude } = item.lokalizacja;
+      L.marker([latitude, longitude]).addTo(map)
+        .bindPopup(`<strong>${item.tytul}</strong><br>${item.opis.substring(0, 100)}...`);
+    }
+
+    function toggleAllSections() {
+      const contents = document.querySelectorAll('.section-content');
+      allVisible = !allVisible;
+      contents.forEach(c => c.style.display = allVisible ? 'block' : 'none');
+    }
+
+    function scrollToMap() {
+      document.getElementById('map').scrollIntoView({ behavior: 'smooth' });
+      setTimeout(() => map.invalidateSize(), 500);
+    }
+  </script>
+</body>
+</html>

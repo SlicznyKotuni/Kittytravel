@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Słowenia2025 - Cyberpunk Travel</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="cyber-theme.css">
+    <style>
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .header {
+            padding: 2rem 0;
+            text-align: center;
+            border-bottom: 1px solid var(--neon-blue);
+            margin-bottom: 2rem;
+        }
+        
+        .logo {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .nav {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .gallery a {
+            display: block;
+            height: 150px;
+            overflow: hidden;
+            border: 1px solid var(--neon-blue);
+            transition: all 0.3s ease;
+        }
+        
+        .gallery a:hover {
+            box-shadow: var(--neon-blue-glow);
+            transform: scale(1.02);
+        }
+        
+        .gallery img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        #map {
+            height: 500px;
+            width: 100%;
+            margin: 2rem 0;
+            border: 1px solid var(--neon-blue);
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .section-toggle {
+            cursor: pointer;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 99;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo neon-text">Słowenia2025</div>
+            <p class="neon-purple">Cyberpunk Travel Experience</p>
+        </header>
+        
+        <nav class="nav">
+            <button id="toggleSections" class="cyber-button">Zwiń/Rozwiń Wszystkie Sekcje</button>
+            <button id="showMap" class="cyber-button">Pokaż Mapę</button>
+        </nav>
+        
+        <main id="content">
+            <!-- Sekcje będą wstawiane tutaj przez JavaScript -->
+        </main>
+        
+        <div id="map" class="hidden"></div>
+        
+        <button class="cyber-button back-to-top hidden" id="backToTop">↑</button>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Konfiguracja Lightbox
+            lightbox.option({
+                'resizeDuration': 200,
+                'wrapAround': true,
+                'albumLabel': 'Zdjęcie %1 z %2'
+            });
+            
+            // Pobierz dane z trip.json
+            fetch('trip.json')
+                .then(response => response.json())
+                .then(data => {
+                    renderContent(data);
+                    initMap(data);
+                })
+                .catch(error => console.error('Błąd ładowania danych:', error));
+            
+            // Przyciski nawigacyjne
+            document.getElementById('toggleSections').addEventListener('click', toggleAllSections);
+            document.getElementById('showMap').addEventListener('click', toggleMap);
+            document.getElementById('backToTop').addEventListener('click', scrollToTop);
+            
+            // Obsługa przycisku "Do góry"
+            window.addEventListener('scroll', toggleBackToTopButton);
+        });
+        
+        function renderContent(data) {
+            const contentElement = document.getElementById('content');
+            
+            // Renderuj główne sekcje
+            data.sekcje.forEach(section => {
+                const sectionElement = document.createElement('div');
+                sectionElement.className = 'cyber-section';
+                sectionElement.id = `section-${section.id}`;
+                
+                // Nagłówek sekcji
+                const header = document.createElement('h2');
+                header.className = 'neon-text';
+                header.textContent = section.tytul;
+                sectionElement.appendChild(header);
+                
+                // Lokalizacja (ukryta dla mapy)
+                const location = document.createElement('div');
+                location.className = 'hidden location-data';
+                location.dataset.lat = section.lokalizacja.latitude;
+                location.dataset.lng = section.lokalizacja.longitude;
+                location.dataset.title = section.tytul;
+                sectionElement.appendChild(location);
+                
+                // Opis sekcji
+                const description = document.createElement('div');
+                description.className = 'section-description';
+                description.innerHTML = `<p>${section.opis}</p>`;
+                sectionElement.appendChild(description);
+                
+                // Galeria zdjęć sekcji
+                const gallery = createGallery(section.id);
+                if (gallery) {
+                    sectionElement.appendChild(gallery);
+                }
+                
+                // Podsekcje
+                if (section.podsekcje && section.podsekcje.length > 0) {
+                    section.podsekcje.forEach(subsection => {
+                        const subsectionElement = document.createElement('div');
+                        subsectionElement.className = 'cyber-subsection';
+                        subsectionElement.style.marginTop = '1.5rem';
+                        subsectionElement.style.paddingLeft = '1rem';
+                        subsectionElement.style.borderLeft = `2px solid ${subsection.id.endsWith('A') ? 'var(--neon-pink)' : subsection.id.endsWith('B') ? 'var(--neon-purple)' : subsection.id.endsWith('C') ? 'var(--neon-green)' : 'var(--neon-blue)'}`;
+                        
+                        // Nagłówek podsekcji
+                        const subheader = document.createElement('h3');
+                        subheader.className = 'cyber-subtitle';
+                        subheader.textContent = subsection.tytul;
+                        subsectionElement.appendChild(subheader);
+                        
+                        // Lokalizacja podsekcji (ukryta dla mapy)
+                        const subLocation = document.createElement('div');
+                        subLocation.className = 'hidden location-data';
+                        subLocation.dataset.lat = subsection.lokalizacja.latitude;
+                        subLocation.dataset.lng = subsection.lokalizacja.longitude;
+                        subLocation.dataset.title = subsection.tytul;
+                        subsectionElement.appendChild(subLocation);
+                        
+                        // Opis podsekcji
+                        const subDescription = document.createElement('div');
+                        subDescription.className = 'subsection-description';
+                        subDescription.innerHTML = `<p>${subsection.opis}</p>`;
+                        subsectionElement.appendChild(subDescription);
+                        
+                        // Galeria zdjęć podsekcji
+                        const subGallery = createGallery(subsection.id);
+                        if (subGallery) {
+                            subsectionElement.appendChild(subGallery);
+                        }
+                        
+                        sectionElement.appendChild(subsectionElement);
+                    });
+                }
+                
+                contentElement.appendChild(sectionElement);
+            });
+        }
+        
+        function createGallery(sectionId) {
+            // W rzeczywistej implementacji tutaj byłoby pobieranie zdjęć z folderu foto/[sectionId]
+            // Dla demonstracji używamy placeholderów
+            const galleryUrls = [
+                `foto/${sectionId}/1.jpg`,
+                `foto/${sectionId}/2.jpg`,
+                `foto/${sectionId}/3.jpg`,
+                `foto/${sectionId}/4.jpg`
+            ];
+            
+            const galleryElement = document.createElement('div');
+            galleryElement.className = 'gallery';
+            
+            galleryUrls.forEach((url, index) => {
+                const link = document.createElement('a');
+                link.href = url;
+                link.setAttribute('data-lightbox', `gallery-${sectionId}`);
+                link.setAttribute('data-title', `Zdjęcie ${index + 1} z sekcji ${sectionId}`);
+                
+                const img = document.createElement('img');
+                img.src = url;
+                img.alt = `Zdjęcie ${index + 1} z sekcji ${sectionId}`;
+                img.onerror = function() {
+                    // Jeśli zdjęcie nie istnieje, użyj placeholder-a
+                    this.src = 'https://via.placeholder.com/300x200/0a0a12/9e9eb3?text=' + encodeURIComponent(sectionId);
+                };
+                
+                link.appendChild(img);
+                galleryElement.appendChild(link);
+            });
+            
+            return galleryElement;
+        }
+        
+        function initMap(data) {
+            const map = L.map('map').setView(
+                [data.centrowanieMapy.latitude, data.centrowanieMapy.longitude], 
+                data.centrowanieMapy.zoom
+            );
+            
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+            
+            // Dodaj markery dla wszystkich sekcji i podsekcji
+            document.querySelectorAll('.location-data').forEach(location => {
+                const lat = parseFloat(location.dataset.lat);
+                const lng = parseFloat(location.dataset.lng);
+                const title = location.dataset.title;
+                
+                if (!isNaN(lat) && !isNaN(lng)) {
+                    const marker = L.marker([lat, lng]).addTo(map)
+                        .bindPopup(title);
+                    
+                    // Dodaj obsługę kliknięcia markera - przewiń do odpowiedniej sekcji
+                    marker.on('click', function() {
+                        const sectionId = location.parentElement.id;
+                        if (sectionId) {
+                            document.getElementById(sectionId).scrollIntoView({
+                                behavior: 'smooth'
+                            });
+                        }
+                    });
+                }
+            });
+            
+            window.map = map; // Zapisz mapę w globalnym zakresie
+        }
+        
+        function toggleAllSections() {
+            const sections = document.querySelectorAll('.cyber-section');
+            const descriptions = document.querySelectorAll('.section-description, .subsection-description');
+            const galleries = document.querySelectorAll('.gallery');
+            
+            // Sprawdź, czy wszystkie sekcje są widoczne
+            const allVisible = Array.from(descriptions).every(desc => 
+                desc.style.display !== 'none'
+            );
+            
+            // Zwiń lub rozwiń wszystkie
+            descriptions.forEach(desc => {
+                desc.style.display = allVisible ? 'none' : 'block';
+            });
+            
+            galleries.forEach(gallery => {
+                gallery.style.display = allVisible ? 'none' : 'grid';
+            });
+        }
+        
+        function toggleMap() {
+            const mapElement = document.getElementById('map');
+            const contentElement = document.getElementById('content');
+            
+            if (mapElement.classList.contains('hidden')) {
+                mapElement.classList.remove('hidden');
+                contentElement.classList.add('hidden');
+                this.textContent = 'Pokaż Treść';
+                
+                // Odśwież mapę, aby poprawnie wyświetliła się po pokazaniu
+                setTimeout(() => {
+                    if (window.map) {
+                        window.map.invalidateSize();
+                    }
+                }, 100);
+            } else {
+                mapElement.classList.add('hidden');
+                contentElement.classList.remove('hidden');
+                this.textContent = 'Pokaż Mapę';
+            }
+        }
+        
+        function toggleBackToTopButton() {
+            const backToTopButton = document.getElementById('backToTop');
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.remove('hidden');
+            } else {
+                backToTopButton.classList.add('hidden');
+            }
+        }
+        
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+    </script>
+</body>
+</html>
