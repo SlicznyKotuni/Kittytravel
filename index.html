@@ -9,8 +9,18 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css">
   <style>
     body { font-size: 1.1rem; overflow-x: hidden; }
-    .gallery { display: flex; flex-wrap: wrap; gap: 10px; margin-left: 1rem; transition: transform 0.3s ease; }
-    .gallery img { max-width: 180px; border: 2px solid var(--neon-blue); border-radius: 0.75rem; box-shadow: var(--neon-blue-glow); height: auto; transition: transform 0.3s ease; }
+    .gallery { margin-left: 2rem; display: flex; flex-wrap: wrap; gap: 10px; transition: transform 0.3s ease; }
+    .gallery img {
+      max-width: 180px;
+      border: 2px solid var(--neon-blue);
+      border-radius: 0.75rem;
+      box-shadow: var(--neon-blue-glow);
+      height: auto;
+      transition: transform 0.3s ease;
+      object-fit: cover;
+      object-position: bottom center;
+      margin-top: 0.5rem;
+    }
     .gallery img:hover { transform: scale(1.05); }
     #map { height: 500px; margin: 2rem 0; }
     textarea { width: 100%; resize: vertical; background-color: var(--cyber-darker); color: var(--cyber-lighter); border: 1px solid var(--neon-purple); padding: 1rem; font-family: monospace; font-size: 1.1rem; border-radius: 0.5rem; }
@@ -42,7 +52,7 @@
       from { transform: translateY(0); }
       to { transform: translateY(-3px); }
     }
-      .kitty-icon {
+    .kitty-icon {
       display: inline-block;
       animation: blink 2s infinite;
     }
@@ -58,18 +68,30 @@
       transform: translateY(-4px);
       box-shadow: var(--neon-blue-glow);
     }
+    .kitty-top {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      font-size: 2rem;
+      animation: blink 2s infinite;
+      z-index: 1000;
+    }
   </style>
 </head>
 <body>
+  <!-- Blinking cat at top right -->
+  <div class="kitty-top">🐱</div>
   <header class="cyber-section">
     <h1 class="neon-text"><span class="kitty-icon">🐾</span> Słowenia 2025 <span class="kitty-icon">🐾</span></h1>
     <button class="cyber-button small" onclick="toggleAllSections()">Ukryj wszystkie</button>
     <button class="cyber-button small" onclick="scrollToMap()">Pokaż Mapę</button>
-      <a class="cyber-button small" href="https://github.com/SlicznyKotuni/Kittytravel" target="_blank">🌐 Kittytravel GitHub</a>
+    <a class="cyber-button small" href="https://github.com/SlicznyKotuni/Kittytravel" target="_blank">🌐 Kittytravel GitHub</a>
   </header>
   <main id="content"></main>
   <div id="map" class="cyber-section"></div>
 
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js"></script>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js"></script>
   <script>
@@ -77,15 +99,28 @@
     let map;
     let allVisible = true;
 
+    // Wczytanie danych i inicjalizacja sekcji, mapy, lightbox
     fetch('trip.json')
       .then(res => res.json())
       .then(data => {
-        document.querySelector('h1').textContent = data.nazwaWycieczki;
+        // Aktualizacja tytułu
+        document.querySelector('h1.neon-text').textContent = data.nazwaWycieczki;
+        // Generowanie sekcji
         generateSections(data.sekcje);
+        // Inicjalizacja mapy
         initMap(data.centrowanieMapy, data.sekcje);
-      });
+        // Konfiguracja Lightbox
+        if (window.lightbox) {
+          lightbox.option({
+            'resizeDuration': 200,
+            'wrapAround': true
+          });
+        }
+      })
+      .catch(err => console.error('Błąd wczytywania trip.json:', err));
 
     function generateSections(sections) {
+      content.innerHTML = ''; // czyść zawartość przed dodaniem
       sections.forEach(sec => {
         const section = document.createElement('section');
         section.classList.add('cyber-section', 'expanded');
@@ -135,9 +170,9 @@
         });
 
         toggle.addEventListener('click', () => {
-          const isExpanded = section.classList.toggle('collapsed');
-          section.classList.toggle('expanded', !isExpanded);
-          toggle.textContent = isExpanded ? 'Pokaż sekcję' : 'Ukryj sekcję';
+          const isCollapsed = section.classList.toggle('collapsed');
+          section.classList.toggle('expanded', !isCollapsed);
+          toggle.textContent = isCollapsed ? 'Pokaż sekcję' : 'Ukryj sekcję';
         });
 
         section.append(h2, toggle, secContent);
@@ -148,18 +183,30 @@
     function createGallery(id) {
       const gallery = document.createElement('div');
       gallery.classList.add('gallery');
-      const formats = ['jpg','jpeg','png'];
-      for (let i = 1; i <= 20; i++) {
+      const formats = ['jpg', 'jpeg', 'png'];
+      const maxImages = 20;
+      for (let i = 1; i <= maxImages; i++) {
         formats.forEach(ext => {
+          const imgPath = `foto/${id}/${i}.${ext}`;
           const img = new Image();
-          img.src = `foto/${id}/${i}.${ext}`;
+          img.src = imgPath;
           img.alt = `${id} image ${i}.${ext}`;
           img.onload = () => {
             const a = document.createElement('a');
-            a.href = img.src;
+            a.href = imgPath;
             a.setAttribute('data-lightbox', id);
-            a.appendChild(img.cloneNode());
-            gallery.append(a);
+            a.setAttribute('data-title', `${id} image ${i}`);
+            const thumb = document.createElement('img');
+            thumb.src = imgPath;
+            thumb.alt = img.alt;
+            thumb.style.objectFit = 'cover';
+            thumb.style.maxWidth = '180px';
+            thumb.style.border = '2px solid var(--neon-blue)';
+            thumb.style.borderRadius = '0.75rem';
+            thumb.style.boxShadow = 'var(--neon-blue-glow)';
+            thumb.style.marginTop = '0.5rem';
+            a.appendChild(thumb);
+            gallery.appendChild(a);
           };
         });
       }
@@ -167,13 +214,15 @@
     }
 
     function initMap(center, sections) {
+      if (!center || !sections) return;
       map = L.map('map').setView([center.latitude, center.longitude], center.zoom);
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; OpenStreetMap' }).addTo(map);
       sections.forEach(sec => { addMarker(sec); sec.podsekcje.forEach(addMarker); });
-      setTimeout(() => map.invalidateSize(), 0);
+      setTimeout(() => map.invalidateSize(), 100);
     }
 
     function addMarker(item) {
+      if (!item.lokalizacja) return;
       L.marker([item.lokalizacja.latitude, item.lokalizacja.longitude])
         .addTo(map)
         .bindPopup(`<strong>${item.tytul}</strong><br>${item.opis.slice(0,100)}...`);
@@ -192,8 +241,11 @@
     }
 
     function scrollToMap() {
-      document.getElementById('map').scrollIntoView({ behavior: 'smooth' });
-      setTimeout(() => map.invalidateSize(), 500);
+      const mapEl = document.getElementById('map');
+      if (mapEl) {
+        mapEl.scrollIntoView({ behavior: 'smooth' });
+        setTimeout(() => map.invalidateSize(), 500);
+      }
     }
   </script>
   <footer class="cyber-section" style="text-align: center; padding: 1rem; margin-top: 2rem;">
