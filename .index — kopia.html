@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Słowenia 2025</title>
   <link rel="stylesheet" href="cyber-theme.css">
-  <link rel="icon" type="image/png" href="favicon.ico">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
   <style>
@@ -13,7 +12,8 @@
     .gallery {
       column-count: 3;
       column-gap: 1rem;
-      margin: 1rem 2rem;
+      margin-left: 2rem;
+      margin-top: 1rem;  /* podnieś galerię w dół */
     }
     .gallery a {
       display: inline-block;
@@ -23,7 +23,6 @@
     }
     .gallery img {
       width: 100%;
-      height: auto;
       border: 2px solid var(--neon-blue);
       border-radius: 0.75rem;
       box-shadow: var(--neon-blue-glow);
@@ -45,10 +44,18 @@
       border-radius: 0.5rem;
     }
     .toggle-button { margin: 0.5rem 0; }
-    .section-content { transition: max-height 0.5s ease; overflow: hidden; }
+    .section-content {
+      transition: max-height 0.5s ease;
+      overflow: hidden;
+    }
     section.collapsed .section-content { max-height: 0; padding: 0; margin: 0; }
-    section.expanded .section-content { max-height: none; }
-    .section-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; align-items: start; }
+    section.expanded .section-content { max-height: none; }  /* brak ograniczenia wysokości, uniknięcie ucinania podsekcji */
+    .section-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      align-items: start;
+    }
     .subsection {
       margin-top: 1.5rem;
       padding: 1rem;
@@ -66,9 +73,9 @@
       border-radius: 0.5rem;
       animation: pulseHeader 2s infinite alternate;
     }
-    @keyframes pulseHeader { from { transform: translateY(0);} to { transform: translateY(-3px);} }
+    @keyframes pulseHeader { from { transform: translateY(0); } to { transform: translateY(-3px); } }
     .kitty-icon { display: inline-block; animation: blink 2s infinite; }
-    @keyframes blink {0%,100%{opacity:1;}50%{opacity:0.2;}}
+    @keyframes blink { 0%,100%{opacity:1;}50%{opacity:0.2;} }
     section.cyber-section { transition: transform 0.3s ease, box-shadow 0.3s ease; border-radius: 1rem; }
     section.cyber-section:hover { transform: translateY(-4px); box-shadow: var(--neon-blue-glow); }
     .kitty-top { position: fixed; top: 1rem; right: 1rem; font-size: 2rem; animation: blink 2s infinite; z-index:1000; }
@@ -81,7 +88,6 @@
     <button class="cyber-button small" onclick="toggleAllSections()">Ukryj wszystkie</button>
     <button class="cyber-button small" onclick="scrollToMap()">Pokaż Mapę</button>
     <a class="cyber-button small" href="https://github.com/SlicznyKotuni/Kittytravel" target="_blank">🌐 Kittytravel GitHub</a>
-<a class="cyber-button small" href="https://forms.office.com/r/cb5Gasjdhq?origin=lprLink" target="_blank">🐾 Wielkie głosowanie!</a>
   </header>
 
   <main id="content"></main>
@@ -89,22 +95,19 @@
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
   <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
-  <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
   <script>
     const content = document.getElementById('content');
     let map;
     let allVisible = true;
 
-    // Wczytaj dane i zainicjalizuj
     fetch('trip.json')
       .then(res => res.json())
       .then(data => {
         document.querySelector('h1.neon-text').textContent = data.nazwaWycieczki;
         generateSections(data.sekcje);
         initMap(data.centrowanieMapy, data.sekcje);
-        // Inicjalizacja galerii GLightbox po dynamicznym dodaniu
-        GLightbox({ selector: '.gallery a', loop: true, keyboard: true });
+        // inicjalizacja GLightbox dla galerii
+        const lightbox = GLightbox({ selector: '.gallery a', loop: true });
       })
       .catch(err => console.error('Błąd wczytywania trip.json:', err));
 
@@ -112,15 +115,15 @@
       content.innerHTML = '';
       sections.forEach(sec => {
         const section = document.createElement('section');
-        section.className = 'cyber-section expanded';
+        section.classList.add('cyber-section', 'expanded');
 
         const h2 = document.createElement('h2');
-        h2.className = 'neon-purple';
+        h2.classList.add('neon-purple');
         h2.textContent = sec.tytul;
 
         const toggle = document.createElement('button');
-        toggle.className = 'cyber-button small toggle-button';
         toggle.textContent = 'Ukryj sekcję';
+        toggle.className = 'cyber-button small toggle-button';
 
         const secContent = document.createElement('div');
         secContent.className = 'section-content';
@@ -128,23 +131,21 @@
         const grid = document.createElement('div');
         grid.className = 'section-grid';
 
-        const textarea = document.createElement('textarea');
-        textarea.rows = 8;
-        textarea.value = sec.opis;
+        const text = document.createElement('textarea');
+        text.rows = 8;
+        text.value = sec.opis;
 
-        const gallery = document.createElement('div');
-        gallery.className = 'gallery';
-        addImagesToGallery(sec.id, gallery);
+        const gallery = createGallery(sec.id);
 
-        grid.append(textarea, gallery);
+        grid.append(text, gallery);
         secContent.append(grid);
 
         sec.podsekcje.forEach(sub => {
           const subWrap = document.createElement('div');
           subWrap.className = 'subsection';
 
-          const subH3 = document.createElement('h3');
-          subH3.textContent = sub.tytul;
+          const subTitle = document.createElement('h3');
+          subTitle.textContent = sub.tytul;
 
           const subGrid = document.createElement('div');
           subGrid.className = 'section-grid';
@@ -153,12 +154,10 @@
           subText.rows = 5;
           subText.value = sub.opis;
 
-          const subGallery = document.createElement('div');
-          subGallery.className = 'gallery';
-          addImagesToGallery(sub.id, subGallery);
+          const subGallery = createGallery(sub.id);
 
           subGrid.append(subText, subGallery);
-          subWrap.append(subH3, subGrid);
+          subWrap.append(subTitle, subGrid);
           secContent.append(subWrap);
         });
 
@@ -173,29 +172,34 @@
       });
     }
 
-    function addImagesToGallery(id, gallery) {
-      const formats = ['jpg','jpeg','png'];
-      const maxFiles = 50;
+    function createGallery(id) {
+      const gallery = document.createElement('div');
+      gallery.classList.add('gallery');
+      const formats = ['jpg', 'jpeg', 'png'];
+      const maxImages = 20;
       formats.forEach(ext => {
-        for (let i = 1; i <= maxFiles; i++) {
-          const path = `foto/${id}/${i}.${ext}`;
-          const img = new Image();
-          img.src = path;
-          img.alt = `${id} image ${i}`;
-          img.onload = () => {
+        for (let i = 1; i <= maxImages; i++) {
+          const imgPath = `foto/${id}/${i}.${ext}`;
+          const tester = new Image();
+          tester.src = imgPath;
+          tester.onload = () => {
             const a = document.createElement('a');
-            a.href = path;
-            a.className = 'glightbox';
+            a.href = imgPath;
+            a.classList.add('glightbox');
             a.setAttribute('data-gallery', id);
             a.setAttribute('data-title', `${id} image ${i}`);
-            const thumb = document.createElement('img');
-            thumb.src = path;
-            thumb.alt = img.alt;
-            a.append(thumb);
+            const img = document.createElement('img');
+            img.src = imgPath;
+            img.alt = `${id} image ${i}.${ext}`;
             gallery.append(a);
+            a.append(img);
+          };
+          tester.onerror = () => {
+            /* plik nie istnieje, pomijaj */
           };
         }
       });
+      return gallery;
     }
 
     function initMap(center, sections) {
@@ -210,28 +214,31 @@
       if (!item.lokalizacja) return;
       L.marker([item.lokalizacja.latitude, item.lokalizacja.longitude])
         .addTo(map)
-        .bindPopup(`<strong>${item.tytul}</strong><br>${item.opis.substring(0,100)}...`);
+        .bindPopup(`<strong>${item.tytul}</strong><br>${item.opis.slice(0,100)}...`);
     }
 
     function toggleAllSections() {
       allVisible = !allVisible;
       document.querySelectorAll('section').forEach(sec => {
-        const btn = sec.querySelector('.toggle-button');
+        const toggle = sec.querySelector('.toggle-button');
         if (allVisible) {
-          sec.classList.remove('collapsed'); sec.classList.add('expanded'); btn.textContent = 'Ukryj sekcję';
+          sec.classList.remove('collapsed'); sec.classList.add('expanded'); toggle.textContent = 'Ukryj sekcję';
         } else {
-          sec.classList.add('collapsed'); sec.classList.remove('expanded'); btn.textContent = 'Pokaż sekcję';
+          sec.classList.add('collapsed'); sec.classList.remove('expanded'); toggle.textContent = 'Pokaż sekcję';
         }
       });
     }
 
     function scrollToMap() {
-      const el = document.getElementById('map');
-      if (el) { el.scrollIntoView({ behavior: 'smooth' }); setTimeout(() => map.invalidateSize(), 500); }
+      const mapEl = document.getElementById('map');
+      if (mapEl) {
+        mapEl.scrollIntoView({ behavior: 'smooth' });
+        setTimeout(() => map.invalidateSize(), 500);
+      }
     }
   </script>
 
-  <footer class="cyber-section" style="text-align:center;padding:1rem;margin-top:2rem;"> class="cyber-section" style="text-align:center;padding:1rem;margin-top:2rem;">
+  <footer class="cyber-section" style="text-align:center;padding:1rem;margin-top:2rem;">
     <p class="neon-pink" style="font-size:1.2rem;">🐱✨ Kitty travel by ŚlicznyKotuni 2025 ✨🐱</p>
   </footer>
 </body>
