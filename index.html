@@ -66,7 +66,7 @@
     @keyframes blink {0%,100%{opacity:1;}50%{opacity:0.2;}}
     section.cyber-section { transition: transform 0.3s ease, box-shadow 0.3s ease; border-radius: 1rem; }
     section.cyber-section:hover { transform: translateY(-4px); box-shadow: var(--neon-blue-glow); }
-    .kitty-top { position: fixed; top: 1rem; right: 1rem; font-size: 2rem; animation: blink 2s infinite; z-index:1000; }
+    .kitty-top { position: fixed; top: 1rem; right: 1rem; font-size: 2rem; animation: blink 2s infinite; z-index:1000; cursor: pointer; }
   </style>
 </head>
 <body>
@@ -101,7 +101,8 @@
       content.innerHTML = '';
       sections.forEach(sec => {
         const section = document.createElement('section'); section.className = 'cyber-section expanded';
-        const h2 = document.createElement('h2'); h2.className = 'neon-purple'; h2.textContent = sec.tytul;
+        const h2 = document.createElement('h2'); h2.className = 'neon-purple'; h2.textContent = sec.tytul;h2.style.cursor = 'pointer';
+h2.addEventListener('click', () => toggleSection(section, toggle));
         const toggle = document.createElement('button'); toggle.className = 'cyber-button small toggle-button'; toggle.textContent = 'Ukryj sekcję';
         const secContent = document.createElement('div'); secContent.className = 'section-content';
         const grid = document.createElement('div'); grid.className = 'section-grid';
@@ -109,13 +110,34 @@
         const gallery = document.createElement('div'); gallery.className = 'gallery'; addImagesToGallery(sec.id, gallery);
         grid.append(ta, gallery); secContent.append(grid);
         sec.podsekcje.forEach(sub => {
-          const swrap = document.createElement('div'); swrap.className = 'subsection';
-          const sh3 = document.createElement('h3'); sh3.textContent = sub.tytul;
-          const sgrid = document.createElement('div'); sgrid.className = 'section-grid';
-          const sta = document.createElement('textarea'); sta.rows = 5; sta.value = sub.opis;
-          const sgal = document.createElement('div'); sgal.className = 'gallery'; addImagesToGallery(sub.id, sgal);
-          sgrid.append(sta, sgal); swrap.append(sh3, sgrid); secContent.append(swrap);
-        });
+  const swrap = document.createElement('div'); swrap.className = 'subsection';
+
+  const sh3 = document.createElement('h3');
+  sh3.textContent = sub.tytul;
+  sh3.style.cursor = 'pointer';
+
+  const sgrid = document.createElement('div');
+  sgrid.className = 'section-grid';
+  sgrid.style.display = 'grid'; // widoczna domyślnie
+
+  const sta = document.createElement('textarea');
+  sta.rows = 5;
+  sta.value = sub.opis;
+
+  const sgal = document.createElement('div');
+  sgal.className = 'gallery';
+  addImagesToGallery(sub.id, sgal);
+
+  sgrid.append(sta, sgal);
+  sh3.addEventListener('click', () => {
+    const hidden = sgrid.style.display === 'none';
+    sgrid.style.display = hidden ? 'grid' : 'none';
+  });
+
+  swrap.append(sh3, sgrid);
+  secContent.append(swrap);
+});
+
         toggle.addEventListener('click', () => {
           const c = section.classList.toggle('collapsed'); section.classList.toggle('expanded', !c);
           toggle.textContent = c ? 'Pokaż sekcję' : 'Ukryj sekcję';
@@ -123,6 +145,12 @@
         section.append(h2, toggle, secContent); content.append(section);
       });
     }
+    
+     function toggleSection(section, toggleButton) {
+      const collapsed = section.classList.toggle('collapsed');
+      section.classList.toggle('expanded', !collapsed);
+      if (toggleButton) toggleButton.textContent = collapsed ? 'Pokaż sekcję' : 'Ukryj sekcję';
+       }
 
     function addImagesToGallery(id, gallery) {
       const formats = ['jpg', 'jpeg', 'png'];
@@ -206,6 +234,9 @@
         setTimeout(() => map.invalidateSize(), 500);
       }
     }
+ document.querySelector('.kitty-top').addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
   </script>
 
   <footer class="cyber-section" style="text-align:center;padding:1rem;margin-top:2rem;">
