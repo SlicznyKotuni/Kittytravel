@@ -106,7 +106,7 @@ h2.addEventListener('click', () => toggleSection(section, toggle));
         const toggle = document.createElement('button'); toggle.className = 'cyber-button small toggle-button'; toggle.textContent = 'Ukryj sekcję';
         const secContent = document.createElement('div'); secContent.className = 'section-content';
         const grid = document.createElement('div'); grid.className = 'section-grid';
-        const ta = document.createElement('textarea'); ta.rows = 8; ta.value = sec.opis;
+        const ta = document.createElement('textarea'); ta.rows = 24; ta.value = sec.opis;
         const gallery = document.createElement('div'); gallery.className = 'gallery'; addImagesToGallery(sec.id, gallery);
         grid.append(ta, gallery); secContent.append(grid);
         sec.podsekcje.forEach(sub => {
@@ -121,7 +121,7 @@ h2.addEventListener('click', () => toggleSection(section, toggle));
   sgrid.style.display = 'grid'; // widoczna domyślnie
 
   const sta = document.createElement('textarea');
-  sta.rows = 5;
+  sta.rows = 24;
   sta.value = sub.opis;
 
   const sgal = document.createElement('div');
@@ -153,53 +153,58 @@ h2.addEventListener('click', () => toggleSection(section, toggle));
        }
 
     function addImagesToGallery(id, gallery) {
-      const formats = ['jpg', 'jpeg', 'png'];
-      const maxFiles = 10;
-      const toLoad = [];
+  const formats = ['jpg', 'jpeg', 'png'];
+  const maxFiles = 10;
+  const toLoad = [];
 
-      formats.forEach(ext => {
-        for (let i = 1; i <= maxFiles; i++) {
-          toLoad.push({ ext, index: i });
-        }
-      });
-
-      let completed = 0;
-
-      toLoad.forEach(({ ext, index }) => {
-        const fullPath = `foto/${id}/${index}.${ext}`;
-        const thumbPath = `thumbs/${id}/${index}.${ext}`;
-        const img = new Image();
-        img.src = thumbPath;
-        img.alt = `${id} image ${index}`;
-        img.loading = 'lazy';
-
-        const a = document.createElement('a');
-        a.href = fullPath;
-        a.classList.add('glightbox');
-        a.setAttribute('data-gallery', id);
-        a.setAttribute('data-title', `${id} image ${index}`);
-        a.append(img);
-
-        img.onload = () => {
-          gallery.append(a);
-          checkDone();
-        };
-
-        img.onerror = () => {
-          a.remove();
-          checkDone();
-        };
-
-        function checkDone() {
-          completed++;
-          if (completed === toLoad.length) {
-            GLightbox({ selector: `.gallery[data-id="${id}"] a`, loop: true, keyboard: true });
-          }
-        }
-      });
-
-      gallery.setAttribute('data-id', id);
+  formats.forEach(ext => {
+    for (let i = 1; i <= maxFiles; i++) {
+      toLoad.push({ ext, index: i });
     }
+  });
+
+  let completed = 0;
+  let loaded = 0;
+
+  toLoad.forEach(({ ext, index }) => {
+    const fullPath = `foto/${id}/${index}.${ext}`;
+    const thumbPath = `thumbs/${id}/${index}.${ext}`;
+    const img = new Image();
+    img.src = thumbPath;
+    img.alt = `${id} image ${index}`;
+    img.loading = 'lazy';
+
+    const a = document.createElement('a');
+    a.href = fullPath;
+    a.classList.add('glightbox');
+    a.setAttribute('data-gallery', id);
+    a.setAttribute('data-title', `${id} image ${index}`);
+    a.append(img);
+
+    img.onload = () => {
+      gallery.append(a);
+      loaded++;
+      checkDone();
+    };
+
+    img.onerror = () => {
+      console.warn(`Brak zdjęcia: ${thumbPath} lub ${fullPath}`);
+      a.remove();
+      checkDone();
+    };
+
+    function checkDone() {
+      completed++;
+      if (completed === toLoad.length) {
+        if (loaded > 0) {
+          gallery.setAttribute('data-id', id); // tylko jeśli coś się udało
+          GLightbox({ selector: `.gallery[data-id="${id}"] a`, loop: true, keyboard: true });
+        }
+      }
+    }
+  });
+}
+
 
     function initMap(c, s) {
       if (!c || !s) return;
