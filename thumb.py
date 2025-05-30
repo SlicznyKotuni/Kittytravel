@@ -110,7 +110,7 @@ def main() -> None:
     with tqdm(total=total, unit="img", desc="Generuję miniatury") as bar:
         for src_file in images:
             rel = src_file.relative_to(src_root)
-            dst_file = (dst_root / rel.parent / (src_file.stem + ".jpg")).resolve()
+            dst_file = (dst_root / rel.parent / (src_file.name)).resolve()
             if dst_file.exists() and not args.force:
                 bar.update()
                 continue
