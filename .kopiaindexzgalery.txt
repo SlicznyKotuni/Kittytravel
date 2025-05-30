@@ -137,7 +137,7 @@
           img.src = thumbPath;
           img.alt = `${id} image ${i}`;
           img.loading = 'lazy';
-          img.onerror = () => { a.remove();};
+          img.onerror = () => { img.src = fullPath; };
           const a = document.createElement('a');
           a.href = fullPath;
           a.classList.add('glightbox');
