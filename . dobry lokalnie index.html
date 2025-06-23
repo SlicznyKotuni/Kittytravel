@@ -102,49 +102,49 @@
       sections.forEach(sec => {
         const section = document.createElement('section'); section.className = 'cyber-section expanded';
         const h2 = document.createElement('h2');
-        h2.className = 'neon-purple';
-        h2.textContent = sec.tytul;
-        h2.style.cursor = 'pointer';
+h2.className = 'neon-purple';
+h2.textContent = sec.tytul;
+h2.style.cursor = 'pointer';
 
-        const toggle = document.createElement('button');
-        toggle.className = 'cyber-button small toggle-button';
-        toggle.textContent = 'Ukryj sekcję';
+const toggle = document.createElement('button');
+toggle.className = 'cyber-button small toggle-button';
+toggle.textContent = 'Ukryj sekcję';
 
-        h2.addEventListener('click', () => toggleSection(section, toggle));
-        toggle.className = 'cyber-button small toggle-button'; toggle.textContent = 'Ukryj sekcję';
+h2.addEventListener('click', () => toggleSection(section, toggle));
+ toggle.className = 'cyber-button small toggle-button'; toggle.textContent = 'Ukryj sekcję';
         const secContent = document.createElement('div'); secContent.className = 'section-content';
         const grid = document.createElement('div'); grid.className = 'section-grid';
         const ta = document.createElement('textarea'); ta.rows = 24; ta.value = sec.opis;
         const gallery = document.createElement('div'); gallery.className = 'gallery'; addImagesToGallery(sec.id, gallery);
         grid.append(ta, gallery); secContent.append(grid);
         sec.podsekcje.forEach(sub => {
-          const swrap = document.createElement('div'); swrap.className = 'subsection';
+  const swrap = document.createElement('div'); swrap.className = 'subsection';
 
-          const sh3 = document.createElement('h3');
-          sh3.textContent = sub.tytul;
-          sh3.style.cursor = 'pointer';
+  const sh3 = document.createElement('h3');
+  sh3.textContent = sub.tytul;
+  sh3.style.cursor = 'pointer';
 
-          const sgrid = document.createElement('div');
-          sgrid.className = 'section-grid';
-          sgrid.style.display = 'grid'; // widoczna domyślnie
+  const sgrid = document.createElement('div');
+  sgrid.className = 'section-grid';
+  sgrid.style.display = 'grid'; // widoczna domyślnie
 
-          const sta = document.createElement('textarea');
-          sta.rows = 24;
-          sta.value = sub.opis;
+  const sta = document.createElement('textarea');
+  sta.rows = 24;
+  sta.value = sub.opis;
 
-          const sgal = document.createElement('div');
-          sgal.className = 'gallery';
-          addImagesToGallery(sub.id, sgal);
+  const sgal = document.createElement('div');
+  sgal.className = 'gallery';
+  addImagesToGallery(sub.id, sgal);
 
-          sgrid.append(sta, sgal);
-          sh3.addEventListener('click', () => {
-            const hidden = sgrid.style.display === 'none';
-            sgrid.style.display = hidden ? 'grid' : 'none';
-          });
+  sgrid.append(sta, sgal);
+  sh3.addEventListener('click', () => {
+    const hidden = sgrid.style.display === 'none';
+    sgrid.style.display = hidden ? 'grid' : 'none';
+  });
 
-          swrap.append(sh3, sgrid);
-          secContent.append(swrap);
-        });
+  swrap.append(sh3, sgrid);
+  secContent.append(swrap);
+});
 
         toggle.addEventListener('click', () => {
           const c = section.classList.toggle('collapsed'); section.classList.toggle('expanded', !c);
@@ -153,57 +153,66 @@
         section.append(h2, toggle, secContent); content.append(section);
       });
     }
-
-    function toggleSection(section, toggleButton) {
+    
+     function toggleSection(section, toggleButton) {
       const collapsed = section.classList.toggle('collapsed');
       section.classList.toggle('expanded', !collapsed);
       if (toggleButton) toggleButton.textContent = collapsed ? 'Pokaż sekcję' : 'Ukryj sekcję';
-    }
+       }
 
     function addImagesToGallery(id, gallery) {
-      const formats = ['jpg', 'jpeg', 'png'];
-      const maxFiles = 10;
-      const imagePromises = [];
+  const formats = ['jpg', 'jpeg', 'png'];
+  const maxFiles = 10;
+  const toLoad = [];
 
-      formats.forEach(ext => {
-        for (let i = 1; i <= maxFiles; i++) {
-          const fullPath = `foto/${id}/${i}.${ext}`;
-          const thumbPath = `thumbs/${id}/${i}.${ext}`;
+  formats.forEach(ext => {
+    for (let i = 1; i <= maxFiles; i++) {
+      toLoad.push({ ext, index: i });
+    }
+  });
 
-          const a = document.createElement('a');
-          a.href = fullPath;
-          a.classList.add('glightbox');
-          a.setAttribute('data-gallery', id);
-          a.setAttribute('data-title', `${id} image ${i}`);
-          const img = document.createElement('img');
-          img.src = thumbPath;
-          img.alt = `${id} image ${i}`;
-          img.loading = 'lazy';
-          a.appendChild(img);
+  let completed = 0;
+  let loaded = 0;
 
-          imagePromises.push(new Promise((resolve, reject) => {
-            img.onload = () => {
-              gallery.appendChild(a);
-              resolve();
-            };
-            img.onerror = () => {
-              console.warn(`Brak zdjęcia: ${thumbPath} lub ${fullPath}`);
-              a.remove();
-              resolve(); // Resolve mimo błędu, żeby Promise.all się nie zawiesił
-            };
-          }));
-        }
-      });
+  toLoad.forEach(({ ext, index }) => {
+    const fullPath = `foto/${id}/${index}.${ext}`;
+    const thumbPath = `thumbs/${id}/${index}.${ext}`;
+    const img = new Image();
+    img.src = thumbPath;
+    img.alt = `${id} image ${index}`;
+    img.loading = 'lazy';
 
-      Promise.all(imagePromises).then(() => {
-        // Sprawdź, czy załadowano jakiekolwiek obrazki
-        if (gallery.querySelectorAll('a').length > 0) {
-          gallery.setAttribute('data-id', id);
-           // Inicjalizacja GLightbox tutaj, po dodaniu wszystkich elementów
+    const a = document.createElement('a');
+    a.href = fullPath;
+    a.classList.add('glightbox');
+    a.setAttribute('data-gallery', id);
+    a.setAttribute('data-title', `${id} image ${index}`);
+    a.append(img);
+
+    img.onload = () => {
+      gallery.append(a);
+      loaded++;
+      checkDone();
+    };
+
+    img.onerror = () => {
+      console.warn(`Brak zdjęcia: ${thumbPath} lub ${fullPath}`);
+      a.remove();
+      checkDone();
+    };
+
+    function checkDone() {
+      completed++;
+      if (completed === toLoad.length) {
+        if (loaded > 0) {
+          gallery.setAttribute('data-id', id); // tylko jeśli coś się udało
           GLightbox({ selector: `.gallery[data-id="${id}"] a`, loop: true, keyboard: true });
         }
-      });
+      }
     }
+  });
+}
+
 
     function initMap(c, s) {
       if (!c || !s) return;
@@ -238,10 +247,9 @@
         setTimeout(() => map.invalidateSize(), 500);
       }
     }
-
-    document.querySelector('.kitty-top').addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
+ document.querySelector('.kitty-top').addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
   </script>
 
   <footer class="cyber-section" style="text-align:center;padding:1rem;margin-top:2rem;">
