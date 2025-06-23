@@ -67,20 +67,14 @@
     section.cyber-section { transition: transform 0.3s ease, box-shadow 0.3s ease; border-radius: 1rem; }
     section.cyber-section:hover { transform: translateY(-4px); box-shadow: var(--neon-blue-glow); }
     .kitty-top { position: fixed; top: 1rem; right: 1rem; font-size: 2rem; animation: blink 2s infinite; z-index:1000; cursor: pointer; }
-    .no-images { 
-      grid-column: 1 / -1;
-      text-align: center;
-      color: var(--neon-pink);
-      padding: 1rem;
-    }
   </style>
 </head>
 <body>
   <div class="kitty-top">🐱</div>
   <header class="cyber-section">
     <h1 class="neon-text"><span class="kitty-icon">🐾</span> Słowenia 2025 <span class="kitty-icon">🐾</span></h1>
-    <button class="cyber-button small" onclick="toggleAllSections()">Ukryj wszystkie</button>
-    <button class="cyber-button small" onclick="scrollToMap()">Pokaż Mapę</button>
+  <!--  <button class="cyber-button small" onclick="toggleAllSections()">Ukryj wszystkie</button> -->
+   <!-- <button class="cyber-button small" onclick="scrollToMap()">Pokaż Mapę</button> -->
     <a class="cyber-button small" href="https://github.com/SlicznyKotuni/Kittytravel" target="_blank">🌐 Kittytravel GitHub</a>
     <a class="cyber-button small" href="https://forms.office.com/r/cb5Gasjdhq?origin=lprLink" target="_blank">🐾 Wielkie głosowanie!</a>
   </header>
@@ -90,10 +84,9 @@
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
   <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
-  <script>
+  <script type="module">
     const content = document.getElementById('content');
     let map, allVisible = true;
-    const lightboxInstances = {};
 
     fetch('trip.json')
       .then(res => res.json())
@@ -107,9 +100,7 @@
     function generateSections(sections) {
       content.innerHTML = '';
       sections.forEach(sec => {
-        const section = document.createElement('section'); 
-        section.className = 'cyber-section expanded';
-        
+        const section = document.createElement('section'); section.className = 'cyber-section expanded';
         const h2 = document.createElement('h2');
         h2.className = 'neon-purple';
         h2.textContent = sec.tytul;
@@ -119,26 +110,15 @@
         toggle.className = 'cyber-button small toggle-button';
         toggle.textContent = 'Ukryj sekcję';
 
-        const secContent = document.createElement('div'); 
-        secContent.className = 'section-content';
-        
-        const grid = document.createElement('div'); 
-        grid.className = 'section-grid';
-        
-        const ta = document.createElement('textarea'); 
-        ta.rows = 24; 
-        ta.value = sec.opis;
-        
-        const gallery = document.createElement('div'); 
-        gallery.className = 'gallery';
-        gallery.dataset.galleryId = sec.id;
-        
-        grid.append(ta, gallery); 
-        secContent.append(grid);
-        
+        h2.addEventListener('click', () => toggleSection(section, toggle));
+        toggle.className = 'cyber-button small toggle-button'; toggle.textContent = 'Ukryj sekcję';
+        const secContent = document.createElement('div'); secContent.className = 'section-content';
+        const grid = document.createElement('div'); grid.className = 'section-grid';
+        const ta = document.createElement('textarea'); ta.rows = 24; ta.value = sec.opis;
+        const gallery = document.createElement('div'); gallery.className = 'gallery'; addImagesToGallery(sec.id, gallery);
+        grid.append(ta, gallery); secContent.append(grid);
         sec.podsekcje.forEach(sub => {
-          const swrap = document.createElement('div'); 
-          swrap.className = 'subsection';
+          const swrap = document.createElement('div'); swrap.className = 'subsection';
 
           const sh3 = document.createElement('h3');
           sh3.textContent = sub.tytul;
@@ -146,7 +126,7 @@
 
           const sgrid = document.createElement('div');
           sgrid.className = 'section-grid';
-          sgrid.style.display = 'grid';
+          sgrid.style.display = 'grid'; // widoczna domyślnie
 
           const sta = document.createElement('textarea');
           sta.rows = 24;
@@ -154,7 +134,7 @@
 
           const sgal = document.createElement('div');
           sgal.className = 'gallery';
-          sgal.dataset.galleryId = sub.id;
+          addImagesToGallery(sub.id, sgal);
 
           sgrid.append(sta, sgal);
           sh3.addEventListener('click', () => {
@@ -164,111 +144,78 @@
 
           swrap.append(sh3, sgrid);
           secContent.append(swrap);
-          
-          // Ładuj zdjęcia dla podsekcji
-          loadGalleryImages(sub.id, sgal);
         });
 
         toggle.addEventListener('click', () => {
-          const c = section.classList.toggle('collapsed'); 
-          section.classList.toggle('expanded', !c);
+          const c = section.classList.toggle('collapsed'); section.classList.toggle('expanded', !c);
           toggle.textContent = c ? 'Pokaż sekcję' : 'Ukryj sekcję';
         });
-        
-        section.append(h2, toggle, secContent); 
-        content.append(section);
-        
-        // Ładuj zdjęcia dla głównej sekcji
-        loadGalleryImages(sec.id, gallery);
+        section.append(h2, toggle, secContent); content.append(section);
       });
     }
-    
-    async function loadGalleryImages(id, galleryElement) {
-      const formats = ['jpg', 'jpeg', 'png'];
-      const maxFiles = 10;
-      let loadedImages = 0;
-      const galleryItems = [];
 
-      for (const ext of formats) {
-        for (let i = 1; i <= maxFiles; i++) {
-          const imgPath = `foto/${id}/${i}.${ext}`;
-          const thumbPath = `thumbs/${id}/${i}.${ext}`;
-          
-          try {
-            // Sprawdź czy zdjęcie istnieje
-            const exists = await checkImageExists(thumbPath);
-            if (exists) {
-              const img = document.createElement('img');
-              img.src = thumbPath;
-              img.alt = `${id} image ${i}`;
-              img.loading = 'lazy';
-              
-              const a = document.createElement('a');
-              a.href = imgPath;
-              a.className = 'glightbox';
-              a.dataset.gallery = id;
-              a.title = `${id} image ${i}`;
-              a.append(img);
-              
-              galleryElement.append(a);
-              galleryItems.push({
-                href: imgPath,
-                title: `${id} image ${i}`
-              });
-              loadedImages++;
-            }
-          } catch (error) {
-            console.debug(`Brak zdjęcia: ${thumbPath}`);
-          }
-        }
-      }
-
-      if (loadedImages > 0) {
-        console.log(`Załadowano ${loadedImages} zdjęć do galerii ${id}`);
-        // Inicjalizacja GLightbox dla tej konkretnej galerii
-        lightboxInstances[id] = GLightbox({
-          selector: `[data-gallery="${id}"]`,
-          loop: true,
-          keyboard: true
-        });
-      } else {
-        console.log(`Brak zdjęć dla galerii ${id}`);
-        const noImagesMsg = document.createElement('p');
-        noImagesMsg.className = 'no-images';
-        noImagesMsg.textContent = 'Brak zdjęć dla tej sekcji';
-        galleryElement.innerHTML = '';
-        galleryElement.append(noImagesMsg);
-      }
+    function toggleSection(section, toggleButton) {
+      const collapsed = section.classList.toggle('collapsed');
+      section.classList.toggle('expanded', !collapsed);
+      if (toggleButton) toggleButton.textContent = collapsed ? 'Pokaż sekcję' : 'Ukryj sekcję';
     }
 
-    function checkImageExists(url) {
-      return new Promise((resolve) => {
-        const img = new Image();
-        img.onload = () => resolve(true);
-        img.onerror = () => resolve(false);
-        img.src = url;
+    function addImagesToGallery(id, gallery) {
+      const formats = ['jpg', 'jpeg', 'png'];
+      const maxFiles = 10;
+      const imagePromises = [];
+
+      formats.forEach(ext => {
+        for (let i = 1; i <= maxFiles; i++) {
+          const fullPath = `foto/${id}/${i}.${ext}`;
+          const thumbPath = `thumbs/${id}/${i}.${ext}`;
+
+          const a = document.createElement('a');
+          a.href = fullPath;
+          a.classList.add('glightbox');
+          a.setAttribute('data-gallery', id);
+          a.setAttribute('data-title', `${id} image ${i}`);
+          const img = document.createElement('img');
+          img.src = thumbPath;
+          img.alt = `${id} image ${i}`;
+          img.loading = 'lazy';
+          a.appendChild(img);
+
+          imagePromises.push(new Promise((resolve, reject) => {
+            img.onload = () => {
+              gallery.appendChild(a);
+              resolve();
+            };
+            img.onerror = () => {
+              console.warn(`Brak zdjęcia: ${thumbPath} lub ${fullPath}`);
+              a.remove();
+              resolve(); // Resolve mimo błędu, żeby Promise.all się nie zawiesił
+            };
+          }));
+        }
+      });
+
+      Promise.all(imagePromises).then(() => {
+        // Sprawdź, czy załadowano jakiekolwiek obrazki
+        if (gallery.querySelectorAll('a').length > 0) {
+          gallery.setAttribute('data-id', id);
+           // Inicjalizacja GLightbox tutaj, po dodaniu wszystkich elementów
+          GLightbox({ selector: `.gallery[data-id="${id}"] a`, loop: true, keyboard: true });
+        }
       });
     }
 
     function initMap(c, s) {
       if (!c || !s) return;
       map = L.map('map').setView([c.latitude, c.longitude], c.zoom);
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { 
-        attribution: '&copy;OpenStreetMap' 
-      }).addTo(map);
-      
-      s.forEach(sec => { 
-        addMarker(sec); 
-        sec.podsekcje.forEach(addMarker); 
-      });
-      
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy;OpenStreetMap' }).addTo(map);
+      s.forEach(sec => { addMarker(sec); sec.podsekcje.forEach(addMarker); });
       setTimeout(() => map.invalidateSize(), 100);
     }
 
     function addMarker(i) {
       if (!i.lokalizacja) return;
-      L.marker([i.lokalizacja.latitude, i.lokalizacja.longitude])
-        .addTo(map)
+      L.marker([i.lokalizacja.latitude, i.lokalizacja.longitude]).addTo(map)
         .bindPopup(`<strong>${i.tytul}</strong><br>${i.opis.substr(0, 100)}...`);
     }
 
@@ -277,13 +224,9 @@
       document.querySelectorAll('section').forEach(sec => {
         const b = sec.querySelector('.toggle-button');
         if (allVisible) {
-          sec.classList.remove('collapsed'); 
-          sec.classList.add('expanded'); 
-          b.textContent = 'Ukryj sekcję';
+          sec.classList.remove('collapsed'); sec.classList.add('expanded'); b.textContent = 'Ukryj sekcję';
         } else {
-          sec.classList.add('collapsed'); 
-          sec.classList.remove('expanded'); 
-          b.textContent = 'Pokaż sekcję';
+          sec.classList.add('collapsed'); sec.classList.remove('expanded'); b.textContent = 'Pokaż sekcję';
         }
       });
     }
@@ -295,7 +238,7 @@
         setTimeout(() => map.invalidateSize(), 500);
       }
     }
-    
+
     document.querySelector('.kitty-top').addEventListener('click', () => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
