@@ -1,0 +1,156 @@
+{
+  "nazwaWycieczki": "Słowenia2025",
+  "centrowanieMapy": {
+    "latitude": 46.1492,
+    "longitude": 14.9860,
+    "zoom": 8
+  },
+  "sekcje": [
+    {
+      "id": "01",
+      "tytul": "Zamek Predjama",
+      "lokalizacja": {
+        "latitude": 45.8158,
+        "longitude": 14.1269
+      },
+      "opis": "Wyobraź sobie zamek, który wyrasta wprost ze skały, spowity legendami i tajemnicami. Predjama to więcej niż budowla – to harmonijne połączenie ludzkiej pomysłowości z potęgą natury. Wędrując po jego komnatach, poczujesz ducha średniowiecza, usłyszysz szepty dawnych rycerzy i poznasz historię Erazma z Predjamy, który niczym słoweński Robin Hood stawiał czoła cesarskiej armii. Odkryj ukryte tunele, lochy i zbrojownię, a na koniec podziwiaj panoramę doliny, która rozciąga się u Twoich stóp. To miejsce, gdzie rzeczywistość miesza się z legendą, a każdy kamień ma swoją opowieść do przekazania.",
+      "podsekcje": []
+    },
+    {
+      "id": "07",
+      "tytul": "Maribor",
+      "lokalizacja": {
+        "latitude": 46.5547,
+        "longitude": 15.6466
+      },
+      "opis": "Maribor, drugie co do wielkości miasto Słowenii, to miejsce, gdzie historia splata się z nowoczesnością, a tradycje winiarskie sięgają wieków. Spaceruj po urokliwej dzielnicy Lent, najstarszej części miasta, gdzie nad brzegiem Drawy znajdziesz Dom Starej Trty z najstarszą winoroślą świata, wpisaną do Księgi Rekordów Guinnessa. Odkryj renesansowy Zamek Maribor, który mieści Muzeum Regionalne, pełne skarbów sztuki i historii. Główny Rynek tętni życiem dzięki festiwalom, takim jak Festiwal Lent, a okoliczne wzgórza zapraszają do degustacji lokalnych win. To miasto, które łączy kulturę, naturę i relaks w niezapomnianą podróż.",
+      "podsekcje": [
+        {
+          "id": "07A",
+          "tytul": "Najstarsza Winorośl Świata",
+          "lokalizacja": {
+            "latitude": 46.5566,
+            "longitude": 15.6422
+          },
+          "opis": "Poznaj Starą Trtę, najstarszą winorośl na świecie, która od ponad 450 lat rośnie w Mariborze! Ta wyjątkowa roślina, wpisana do Księgi Rekordów Guinnessa, to symbol słoweńskiej tradycji winiarskiej. Odmiana Žametovka co roku daje 35-55 kg winogron, z których powstaje około 100 butelek unikalnego wina. Odwiedź Dom Starej Trty, gdzie w Vinotece możesz degustować lokalne wina, a w muzeum poznasz fascynującą historię tej winorośli, która przetrwała wojny i klęski żywiołowe. W pobliżu znajduje się także Muzeum Wina Vinag 1847, oferujące wycieczki z degustacją. To miejsce, gdzie historia wina ożywa na Twoich oczach."
+        },
+        {
+          "id": "07B",
+          "tytul": "Zamek w Mariborze",
+          "lokalizacja": {
+            "latitude": 46.5555,
+            "longitude": 15.6477
+          },
+          "opis": "Zamek w Mariborze to renesansowa perła w sercu miasta, zbudowana w XV wieku i łącząca różne style architektoniczne. Obecnie mieści Muzeum Regionalne, które zachwyca kolekcjami sztuki pięknej, archeologii i etnografii. Podziwiaj freski w Sali Festiwalowej, autorstwa Johanna Geblera, przedstawiające bitwy z Turkami, oraz eksponaty opowiadające o bogatej historii regionu. Zamek to nie tylko muzeum, ale także miejsce wydarzeń kulturalnych, które ożywiają jego mury. To idealny przystanek dla miłośników sztuki i historii, pragnących zgłębić przeszłość Mariboru."
+        },
+        {
+          "id": "07C",
+          "tytul": "Główny Rynek",
+          "lokalizacja": {
+            "latitude": 46.5544,
+            "longitude": 15.6466
+          },
+          "opis": "Główny Rynek (Glavni trg) to serce Mariboru, otoczone zabytkowymi kamienicami i tętniące życiem. W centrum stoi kolumna maryjna, a renesansowy ratusz dodaje miejscu uroku. To tutaj odbywają się najważniejsze wydarzenia, w tym Festiwal Lent, jeden z największych plenerowych festiwali w Słowenii, pełen muzyki, teatru i sztuki. Odwiedź kawiarnie i restauracje, by poczuć atmosferę miasta, i zwróć uwagę na detale architektoniczne budynków, które świadczą o średniowiecznej przeszłości. To miejsce, gdzie historia Mariboru spotyka się z jego współczesnym duchem."
+        },
+        {
+          "id": "07D",
+          "tytul": "Wieża Wodna / Wieża Sądowa",
+          "lokalizacja": {
+            "latitude": 46.5555,
+            "longitude": 15.6433
+          },
+          "opis": "Wieża Wodna i Wieża Sądowa to ikony średniowiecznej architektury obronnej Mariboru. Wieża Wodna, zbudowana w XVI wieku z masywnych kamiennych bloków, pełniła funkcję obronną, a później dostarczała wodę miastu. Wieża Sądowa, znana także jako Wieża Portowa, była miejscem egzekucji i więzieniem, świadcząc o burzliwej historii regionu. Choć Wieża Wodna nie jest dostępna do zwiedzania, jej unikalny pięciokątny kształt zachwyca z zewnątrz. Wieża Sądowa oferuje wgląd w przeszłość obronną miasta. To miejsca, które opowiadają o sile i wytrwałości Mariboru."
+        }
+      ]
+    },
+    {
+      "id": "08",
+      "tytul": "Radovljica",
+      "lokalizacja": {
+        "latitude": 46.3411,
+        "longitude": 14.1758
+      },
+      "opis": "Radovljica to urokliwe miasteczko w sercu Słowenii, które zachwyca renesansową i barokową architekturą oraz spokojną atmosferą. Spaceruj po malowniczym rynku, gdzie znajdziesz zabytkowe kamienice i ratusz, i odwiedź Muzeum Pszczelarstwa, które prezentuje słoweńską tradycję pszczelarską. Nie przegap Muzeum Farmacji i Alchemii, gdzie odkryjesz fascynującą historię medycyny. Radovljica to idealne miejsce dla tych, którzy szukają połączenia kultury, historii i relaksu w alpejskiej scenerii.",
+      "podsekcje": [
+        {
+          "id": "08A",
+          "tytul": "Muzeum Farmacji i Alchemii w Radovljicy",
+          "lokalizacja": {
+            "latitude": 46.3411,
+            "longitude": 14.1758
+          },
+          "opis": "Przenieś się w czasie w Muzeum Farmacji i Alchemii w Radovljicy, gdzie możesz podziwiać XVIII-wieczny sprzęt apteczny, zdobione naczynia ceramiczne do przechowywania leków oraz laboratorium alchemika. Muzeum oferuje unikalną kolekcję, która pozwala zgłębić historię farmacji i alchemii. Choć informacje na temat interaktywnych wystaw i ogrodu ziołowego są ograniczone, z pewnością znajdziesz tu wiele ciekawych eksponatów i opowieści. To miejsce, gdzie nauka łączy się z historią, oferując fascynującą podróż w przeszłość."
+        },
+        {
+          "id": "08B",
+          "tytul": "Rynek w Radovljicy",
+          "lokalizacja": {
+            "latitude": 46.3411,
+            "longitude": 14.1758
+          },
+          "opis": "Rynek w Radovljicy to serce miasteczka, otoczone renesansowymi i barokowymi kamienicami, wśród których wyróżnia się Dom Trzech Kaw, jeden z najpiękniejszych przykładów architektury renesansowej w Słowenii. Znajdziesz tu także ratusz i kościół parafialny, które dodają uroku temu miejscu. Rynek tętni życiem podczas lokalnych festynów i wydarzeń kulturalnych, oferując idealną okazję do poznania lokalnej atmosfery. To miejsce, gdzie historia spotyka się z codziennym życiem Radovljicy."
+        }
+      ]
+    },
+    {
+      "id": "10",
+      "tytul": "Dolina Soczy",
+      "lokalizacja": {
+        "latitude": 46.3333,
+        "longitude": 13.5667
+      },
+      "opis": "Dolina Soczy to raj dla miłośników przyrody i aktywnego wypoczynku, gdzie szmaragdowa rzeka Socza wije się wśród Alp Julijskich, tworząc zapierające dech krajobrazy. Spróbuj raftingu lub kajakarstwa na krystalicznie czystej rzece, wędruj po szlakach turystycznych lub odwiedź Jaskinie Škocjańskie, wpisane na listę UNESCO. Dolina oferuje także możliwość poznania lokalnej kultury i historii, w tym śladów I wojny światowej. To miejsce, gdzie natura i przygoda łączą się w niezapomnianą podróż.",
+      "podsekcje": []
+    },
+    {
+      "id": "11",
+      "tytul": "Logarska Dolina",
+      "lokalizacja": {
+        "latitude": 46.3769,
+        "longitude": 14.6394
+      },
+      "opis": "Logarska Dolina, jedna z najpiękniejszych alpejskich dolin polodowcowych w Europie, zachwyca harmonią między człowiekiem a przyrodą. Podziwiaj majestatyczne szczyty, wodospad Rinka i Alpejskie Ogrody Botaniczne, które prezentują bogatą florę Alp. Odwiedź tradycyjne gospodarstwa, gdzie skosztujesz lokalnych produktów i poznasz wiejskie życie. Szlaki turystyczne zapraszają na wędrówki, a spokojna atmosfera sprzyja relaksowi. To miejsce, gdzie natura opowiada swoją własną historię.",
+      "podsekcje": []
+    },
+    {
+      "id": "12",
+      "tytul": "Kościół Pielgrzymkowy Świętej Trójcy",
+      "lokalizacja": {
+        "latitude": 46.5783,
+        "longitude": 15.9469
+      },
+      "opis": "Kościół Pielgrzymkowy Świętej Trójcy w Sveta Trojica v Slovenskih Goricah to barokowa perła z XVII wieku, znana z pięknych fresków, bogato zdobionych ołtarzy i spokojnej atmosfery. Jako popularne miejsce pielgrzymek przyciąga tych, którzy szukają duchowego wyciszenia. Otaczające kościół wzgórza i winnice oferują malownicze widoki, idealne na spokojny spacer. To miejsce, gdzie duchowość łączy się z pięknem natury i architektury.",
+      "podsekcje": []
+    },
+    {
+      "id": "13",
+      "tytul": "Schloss Statenberg",
+      "lokalizacja": {
+        "latitude": 46.1833,
+        "longitude": 15.5667
+      },
+      "opis": "Schloss Statenberg to barokowy zamek, który wznosi się dumnie nad okolicą, otoczony rozległym parkiem i winnicami. Zbudowany w XVIII wieku, zachwyca elegancką architekturą i bogato zdobionymi wnętrzami, które odzwierciedlają splendor epoki. Odwiedź zamkowe sale, gdzie organizowane są wystawy i wydarzenia kulturalne, i spaceruj po ogrodach, które oferują piękne widoki. To idealne miejsce dla miłośników historii, sztuki i malowniczych krajobrazów.",
+      "podsekcje": []
+    },
+    {
+      "id": "14",
+      "tytul": "Farma lawendy w Haloze",
+      "lokalizacja": {
+        "latitude": 46.3500,
+        "longitude": 15.8833
+      },
+      "opis": "Zanurz się w fioletowym morzu lawendy na farmie w Haloze, jednym z najpiękniejszych miejsc w regionie Ptuj. Poczuj kojący zapach lawendy, która rozpościera się na hektarach pola, tworząc niesamowity, malowniczy krajobraz. To idealne miejsce na relaks i odprężenie, gdzie możesz spacerować między rzędami lawendowych krzewów, podziwiać różnorodność odmian i nacieszyć się spokojem wiejskiej okolicy. Na farmie można dowiedzieć się więcej o uprawie lawendy, jej zastosowaniach w kosmetyce i aromaterapii, a także zakupić produkty lawendowe, takie jak olejki eteryczne, mydła, świece czy suszone kwiaty. Wokół farmy rozciągają się wzgórza i winnice, które dodają temu miejscu jeszcze większego uroku. To miejsce, gdzie natura i spokój łączą się w harmonijną całość, oferując turystom niezapomniane doświadczenie.",
+      "podsekcje": []
+    },
+    {
+      "id": "15",
+      "tytul": "Zamek Negova",
+      "lokalizacja": {
+        "latitude": 46.6444,
+        "longitude": 15.7675
+      },
+      "opis": "Zwiedź Zamek Negova, położony w malowniczej wiosce Negova, niedaleko Gornja Radgona w północno-wschodniej Słowenii. Zamek jest kompleksem budynków z XVI i początku XVII wieku, zbudowanych na fundamentach oryginalnego zamku z 1425 roku. Przez wieki zamek należał do różnych rodów szlacheckich, w tym do rodziny Trauttmansdorffów, co świadczy o jego bogatej historii. Dziś zamek jest odrestaurowany i służy jako miejsce różnych wydarzeń kulturalnych, w tym Festiwalu Miłości, wystaw i koncertów. W pobliżu zamku znajduje się kościół parafialny pw. Narodzenia Najświętszej Maryi Panny, który również jest wart uwagi ze względu na swoją architekturę i historię. W okolicy Negovy znaleziono również znane hełmy z Negau, ważne artefakty archeologiczne z okresu halsztackiego, które świadczą o starożytnej obecności człowieka w tym regionie. To miejsce, gdzie historia splata się z współczesnością, oferując turystom unikalne doświadczenie i możliwość zanurzenia się w kulturze i tradycji Słowenii.",
+      "podsekcje": []
+    }
+  ]
+}
